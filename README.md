@@ -1,10 +1,10 @@
-## 📚 Library Management System API
+## Library Management System API
 
 A Django REST Framework-based API that supports book borrowing, returning, inventory tracking, and late return penalties.
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the Repository
 
@@ -46,15 +46,15 @@ python manage.py runserver
 
 ---
 
-## 🔐 API Authentication
+## API Authentication
 
 Use token-based authentication. Get a token using the `/api/token/` endpoint (if implemented), or use session login via Django admin.
 
 ---
 
-## 📦 Key Features
+## Key Features
 
-### ✅ Borrowing Logic (`POST /api/borrow/`)
+### Borrowing Logic (`POST /api/borrow/`)
 
 * A user can borrow a book by providing `book_id`.
 * The system:
@@ -68,7 +68,7 @@ Use token-based authentication. Get a token using the `/api/token/` endpoint (if
     * `due_date` = 14 days from today
 * All operations are **atomic** to prevent race conditions.
 
-### 🔁 Returning Logic (`POST /api/return/`)
+### Returning Logic (`POST /api/return/`)
 
 * A user returns a book by providing `borrow_id`.
 * The system:
@@ -80,14 +80,14 @@ Use token-based authentication. Get a token using the `/api/token/` endpoint (if
     * If so, calculates how many days late.
     * Adds **1 penalty point per late day** to the user's profile.
 
-### 📊 Penalty Check (`GET /api/users/{id}/penalties/`)
+### Penalty Check (`GET /api/users/{id}/penalties/`)
 
 * Shows total accumulated penalty points for a user.
 * Only viewable by the user themself or an admin.
 
 ---
 
-## 📅 Penalty Points Calculation
+## Penalty Points Calculation
 
 ```python
 late_days = (return_date - due_date).days
@@ -98,19 +98,16 @@ Only applied when a book is returned **after** its due date.
 
 ---
 
-## 🧠 Assumptions & Known Limitations
+## Assumptions & Known Limitations
 
-* Users cannot borrow the same book more than once simultaneously.
-* A user can have a **maximum of 3 active borrows** at any time.
-* All books must have at least 1 available copy to be borrowed.
 * Timezone handling is simplified using Django defaults (UTC).
 * Borrow and return operations are **atomic**, avoiding race conditions with inventory.
-* **Borrowing back-dates cannot be changed via API** by default (but test mode or admin edit can be added for testing).
+* **Borrowing back-dates cannot be changed via API**.
 * **No automatic overdue scanning** — penalties are applied only at the time of return.
 
 ---
 
-## 🧪 Testing
+## Testing
 
 * You can test endpoints using Postman or the Django admin panel.
 * Sample data can be added via Django admin or fixtures.
