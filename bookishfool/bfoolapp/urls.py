@@ -15,5 +15,7 @@ urlpatterns = [
     path('api/authors/<int:pk>/', AuthorDetailAPIView.as_view(), name='author-detail'),
     path('api/categories/', CategoryListCreateAPIView.as_view(), name='category-list-create'),
     path('api/categories/<int:pk>/', CategoryDetailAPIView.as_view(), name='category-detail'),
-
+    path('api/borrow/', BorrowBookAPIView.as_view(), name='borrow-book'),
+    path('api/return/', ReturnBookAPIView.as_view(), name='return-book'),
+    path('api/users/<int:id>/penalties/', UserPenaltyView.as_view(), name='user-penalties'),
 ]

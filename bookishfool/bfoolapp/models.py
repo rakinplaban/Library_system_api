@@ -64,6 +64,3 @@ class Borrow(models.Model):  # use singular 'Borrow'
 
     def __str__(self):
         return f"{self.user.username} borrowed {self.book.title}"
-
-    def __str__(self):
-        return f"{self.user.username} borrowed {self.book.title}"
